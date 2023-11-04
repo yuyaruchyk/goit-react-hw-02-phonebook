@@ -1,11 +1,13 @@
 import React from 'react';
-import { ContactForm } from './PhoneForm/PhoneForm';
+import { Component } from 'react';
+import {ContactForm} from './ContactForm/ContactForm'
+
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { nanoid } from 'nanoid';
 import { Container } from './App.styled';
 
-export class App extends React.Component {
+export class App extends Component {
 
   state = {
     contacts: [
@@ -17,7 +19,7 @@ export class App extends React.Component {
     filter: '',
   };
 
-   updateFilter = newTopic => {
+  updateFilter = newTopic => {
     this.setState(() => {
       return {
         filter: newTopic,
@@ -32,21 +34,18 @@ export class App extends React.Component {
       const contactName = contact.name.toLowerCase();
       const contactNumber = contact.number;
 
-        return (
+      return (
         contactName.includes(filter.toLowerCase()) ||
         contactNumber.includes(filter)
       );
     });
   };
  
-addPhone = newItem => {
+  addPhone = newItem => {
     const { contacts } = this.state;
 
     if (contacts.some(contact => contact.name === newItem.name)) {
-      Report.failure('', `${newItem.name} already in phonebook`, 'OK', {
-        width: '360px',
-        svgSize: '120px',
-      });
+      alert(`${newItem.name} already in phonebook`);
       return;
     }
 
@@ -60,9 +59,8 @@ addPhone = newItem => {
       };
     });
 
-    Report.success('Super', `${newItem.name} added to your contacts`, 'OK', {
-      width: '360px',
-      svgSize: '120px',
+    alert('Super', `${newItem.name} added to your contacts`, 'OK', {
+     
     });
   };
 
@@ -81,19 +79,15 @@ addPhone = newItem => {
     return (
       <Container>
         <h1>Phonebook</h1>
-        <ContactForm onAdd={this.addPhone} />
+        <ContactForm filter={filter} />
         <h2>Contacts</h2>
-        <Filter filter={filter} onSearchPhone={this.updateFilter} />
         {this.state.contacts.length > 0 && <ContactList items={filteredContacts} onDelete={this.deletePhone} />}
-        
-        <GlobalStyle />
       </Container>
     );
   }
+
 }
 
 
 
-
-
-export default App 
+export default App;

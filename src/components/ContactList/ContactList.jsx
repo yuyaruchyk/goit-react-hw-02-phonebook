@@ -1,19 +1,19 @@
 
 export const ContactList = ({ items, onDelete }) => {
   return (
-    <PhonebookList>
+    <ul>
       {items.map(item => {
         return (
-          <PhonebookItem key={item.id}>
+          <li key={item.id}>
             <p>
-              {item.name}: <PhonebookNumber>{item.number}</PhonebookNumber>
+              {item.name}: <span>{item.number}</span>
             </p>
-            <PhonebookButton onClick={() => onDelete(item.id)}>
+            <button onClick={() => onDelete(item.id)}>
               Delete
-            </PhonebookButton>
-          </PhonebookItem>
+            </button>
+          </li>
         );
       })}
-    </PhonebookList>
+    </ul>
   );
 };
