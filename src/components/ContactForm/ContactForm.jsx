@@ -25,7 +25,7 @@ export const ContactForm = () => {
         <StyledLabel htmlFor="name">Name:</StyledLabel>
         <StyledField type="text" id="name" name="name" required />
         <StyledLabel htmlFor="number">Number:</StyledLabel>
-        <StyledField type="number" id="number" name="number" required />
+        <StyledField type="number" id="number" name="number" />
         <ErrorMessage name="name" component="div" />
 
         <Btn type="submit">Add contact</Btn>
