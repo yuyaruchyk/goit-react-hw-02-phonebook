@@ -1,15 +1,13 @@
-import styled from 'styled-components'
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-
+import styled from 'styled-components';
+import { Field } from 'formik';
 
 export const MainForm = styled.form`
-display: flex;
+  display: flex;
   flex-direction: column;
   max-width: 300px;
   margin: 0 auto;
   gap: 24px;
-
-`
+`;
 export const Btn = styled.button`
   margin-bottom: 20px;
   border: none;
@@ -29,14 +27,14 @@ export const Btn = styled.button`
   margin-right: auto;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
-`
+`;
 
 export const StyledLabel = styled.label`
- font-size: 25px;
+  font-size: 25px;
   font-weight: 500;
   text-transform: capitalize;
   text-shadow: 0 1px 1px #2d2020;
-`
+`;
 
 export const StyledField = styled(Field)`
   width: 100%;
