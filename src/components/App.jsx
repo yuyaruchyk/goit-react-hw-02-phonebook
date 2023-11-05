@@ -1,14 +1,12 @@
 import React from 'react';
 import { Component } from 'react';
-import {ContactForm} from './ContactForm/ContactForm'
-
+import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { nanoid } from 'nanoid';
 import { Container } from './App.styled';
 
 export class App extends Component {
-
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -40,7 +38,7 @@ export class App extends Component {
       );
     });
   };
- 
+
   addPhone = newItem => {
     const { contacts } = this.state;
 
@@ -59,9 +57,7 @@ export class App extends Component {
       };
     });
 
-    alert('Super', `${newItem.name} added to your contacts`, 'OK', {
-     
-    });
+    alert(`${newItem.name} added to your contacts`, 'OK', {});
   };
 
   deletePhone = phoneId => {
@@ -79,15 +75,15 @@ export class App extends Component {
     return (
       <Container>
         <h1>Phonebook</h1>
-        <ContactForm filter={filter} />
+        <ContactForm onAdd={this.addPhone} />
         <h2>Contacts</h2>
-        {this.state.contacts.length > 0 && <ContactList items={filteredContacts} onDelete={this.deletePhone} />}
+        <Filter filter={filter} onSearchNumber={this.updateFilter} />
+        {this.state.contacts.length > 0 && (
+          <ContactList items={filteredContacts} onDelete={this.deletePhone} />
+        )}
       </Container>
     );
   }
-
 }
-
-
 
 export default App;

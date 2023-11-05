@@ -24,11 +24,12 @@ export const ContactForm = () => {
       <Form>
         <div>
           <label htmlFor="name">Name:</label>
-          <Field type="text" id="name" name="name" required />
+                  <Field type="text" id="name" name="name" required />
+                   <Field type="number" id="number" name="number" required />
           <ErrorMessage name="name" component="div" />
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit">Add contact</button>
         </div>
       </Form>
     </Formik>

@@ -1,4 +1,3 @@
-
 export const ContactList = ({ items, onDelete }) => {
   return (
     <ul>
@@ -8,9 +7,7 @@ export const ContactList = ({ items, onDelete }) => {
             <p>
               {item.name}: <span>{item.number}</span>
             </p>
-            <button onClick={() => onDelete(item.id)}>
-              Delete
-            </button>
+            <button onClick={() => onDelete(item.id)}>Delete</button>
           </li>
         );
       })}
