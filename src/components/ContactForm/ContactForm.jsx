@@ -1,5 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { MainForm, Btn, StyledLabel, StyledField} from './ContactForm.styled';
+
+
 
 const initialValues = {
   name: '',
@@ -21,20 +24,24 @@ export const ContactForm = () => {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      <Form>
-        <div>
-          <label htmlFor="name">Name:</label>
-                  <Field type="text" id="name" name="name" required />
-                   <Field type="number" id="number" name="number" required />
+      <MainForm>
+       
+      
+          <StyledLabel htmlFor="name">Name:</StyledLabel>
+        <StyledField type="text" id="name" name="name" required />
+        <StyledLabel htmlFor="number">Number:</StyledLabel>
+        <StyledField type="number" id="number" name="number" required />
           <ErrorMessage name="name" component="div" />
-        </div>
-        <div>
-          <button type="submit">Add contact</button>
-        </div>
-      </Form>
+        
+       
+          <Btn type="submit">Add contact</Btn>
+        
+
+          
+       
+      </MainForm>
     </Formik>
   );
 };
-
 
 
