@@ -1,59 +1,46 @@
-
-
-import { MainForm, Btn, StyledLabel, StyledField} from './ContactForm.styled';
+import { MainForm, Btn, StyledLabel, StyledField, Error } from './ContactForm.styled';
 import * as Yup from 'yup';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 
- const FormSchema = Yup.object().shape({
-   firstName: Yup.string()
-     .min(2, 'Too Short!')
-     .max(50, 'Too Long!')
-     .required('Required'),
-  
-     number: Yup.string()
+const PhonebookSchema = Yup.object().shape({
+  name: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
- });
+  number: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+});
 
-export const ContactForm = ({ onAdd }) => (
-  <div>
-   
+export const ContactForm = ({ onAdd }) => {
+  return (
     <Formik
       initialValues={{
-       name: '',
-      number: '',
-        
+        name: '',
+        number: '',
       }}
-      validationSchema={FormSchema}
-        onSubmit={(values, actions) => {
-          
-          onAdd(values);
-          console.log(onAdd())
-        }}
-      >
-    
+      validationSchema={PhonebookSchema}
+      onSubmit={(values, actions) => {
+        actions.resetForm();
+        onAdd(values);
+      }}
+    >
       <MainForm>
         <StyledLabel>
-
-           First Name
-          <StyledField name="name" />
-          <ErrorMessage name="name" component="span" />
+          Name
+          <StyledField name="name" placeholder="Name" />
+          <Error component={'span'} name="name" />
         </StyledLabel>
 
         <StyledLabel>
-          
-       Phone
-            <StyledField name="number"/>
-            <ErrorMessage component={'span'} name="number" />
-        
-        
+          Phone
+          <StyledField name="number" placeholder="Number" />
+          <Error component={'span'} name="number" />
         </StyledLabel>
-          
 
-        
-        <Btn type="submit">Submit</Btn>
+        <Btn type="submit">Add contact</Btn>
       </MainForm>
     </Formik>
-  </div>
-);
+  );
+};

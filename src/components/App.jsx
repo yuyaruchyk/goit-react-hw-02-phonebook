@@ -39,9 +39,6 @@ export class App extends Component {
     });
   };
 
-
-
-
   deletePhone = phoneId => {
     this.setState(prevState => {
       return {
@@ -51,13 +48,17 @@ export class App extends Component {
   };
 
   addPhone = newItem => {
-    this.setState(prevState => {
-      return {
-        contacts: [...prevState.contacts, { ...newItem, id: nanoid(), }]
-      }
-    })
-     
-   }
+    const { contacts } = this.state;
+    if (contacts.some(contact => contact.number === newItem.number)) {
+      alert('Contact with the same number already exists!');
+    } else {
+      this.setState(prevState => {
+        return {
+          contacts: [...prevState.contacts, { ...newItem, id: nanoid() }],
+        };
+      });
+    }
+  };
 
   render() {
     const { filter } = this.state;
@@ -65,12 +66,15 @@ export class App extends Component {
 
     return (
       <Container>
-         <h1>Phonebook</h1>
+        <h1>Phonebook</h1>
         <ContactForm onAdd={this.addPhone} />
         <h2>Contacts</h2>
-        <Filter filter={filter} onSearchPhone={this.updateFilter} />
-        <ContactList items={filteredContacts} onDelete={this.deletePhone} onAdd={this.addPhone} />
-        
+        <Filter filter={filter} onSearchNumber={this.updateFilter} />
+        <ContactList
+          items={filteredContacts}
+          onDelete={this.deletePhone}
+          onAdd={this.addPhone}
+        />
       </Container>
     );
   }
