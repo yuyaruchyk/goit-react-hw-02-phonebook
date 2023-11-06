@@ -1,35 +1,58 @@
-import { Formik, ErrorMessage } from 'formik';
+
+
+import { MainForm, Btn, StyledLabel, StyledField, StyledError} from './ContactForm.styled';
 import * as Yup from 'yup';
-import { MainForm, Btn, StyledLabel, StyledField } from './ContactForm.styled';
+import { Formik } from 'formik';
 
-const initialValues = {
-  name: '',
-};
+ const FormSchema = Yup.object().shape({
+   firstName: Yup.string()
+     .min(2, 'Too Short!')
+     .max(50, 'Too Long!')
+     .required('Required'),
+  
+     number: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+ });
 
-const validationSchema = Yup.object({
-  name: Yup.string().required('Name is required'),
-});
-
-export const ContactForm = () => {
-  const onSubmit = values => {
-    console.log(values);
-  };
-
-  return (
+export const ContactForm = ({ onAdd }) => (
+  <div>
+   
     <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
+      initialValues={{
+       name: '',
+      number: '',
+        
+      }}
+      validationSchema={FormSchema}
+        onSubmit={(values, actions) => {
+          actions.resetForm();
+          onAdd(values);
+        }}
+      >
+    
       <MainForm>
-        <StyledLabel htmlFor="name">Name:</StyledLabel>
-        <StyledField type="text" id="name" name="name" required />
-        <StyledLabel htmlFor="number">Number:</StyledLabel>
-        <StyledField type="number" id="number" name="number" />
-        <ErrorMessage name="name" component="div" />
+        <StyledLabel>
 
-        <Btn type="submit">Add contact</Btn>
+           First Name
+          <StyledField name="name" />
+          <StyledError name="name" component="span" />
+        </StyledLabel>
+
+        <StyledLabel>
+          
+       Phone
+            <StyledField name="number"/>
+            <StyledError component={'span'} name="number" />
+        
+        
+        </StyledLabel>
+          
+
+        
+        <Btn type="submit">Submit</Btn>
       </MainForm>
     </Formik>
-  );
-};
+  </div>
+);

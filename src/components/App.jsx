@@ -39,26 +39,8 @@ export class App extends Component {
     });
   };
 
-  addPhone = newItem => {
-    const { contacts } = this.state;
 
-    if (contacts.some(contact => contact.name === newItem.name)) {
-      alert(`${newItem.name} already in phonebook`);
-      return;
-    }
 
-    const item = {
-      ...newItem,
-      id: nanoid(),
-    };
-    this.setState(prevState => {
-      return {
-        contacts: [...prevState.contacts, item],
-      };
-    });
-
-    alert(`${newItem.name} added to your contacts`, 'OK', {});
-  };
 
   deletePhone = phoneId => {
     this.setState(prevState => {
@@ -68,19 +50,27 @@ export class App extends Component {
     });
   };
 
+  addPhone = newItem => {
+    this.setState(prevState => {
+      return {
+        contacts: [...prevState.contacts, { ...newItem, id: nanoid(), }]
+      }
+    })
+     
+   }
+
   render() {
     const { filter } = this.state;
     const filteredContacts = this.filterContacts();
 
     return (
       <Container>
-        <h1>Phonebook</h1>
+         <h1>Phonebook</h1>
         <ContactForm onAdd={this.addPhone} />
         <h2>Contacts</h2>
-        <Filter filter={filter} onSearchNumber={this.updateFilter} />
-        {this.state.contacts.length > 0 && (
-          <ContactList items={filteredContacts} onDelete={this.deletePhone} />
-        )}
+        <Filter filter={filter} onSearchPhone={this.updateFilter} />
+        <ContactList items={filteredContacts} onDelete={this.deletePhone} onAdd={this.addPhone} />
+        
       </Container>
     );
   }
