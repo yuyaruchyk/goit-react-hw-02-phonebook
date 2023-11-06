@@ -1,23 +1,20 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const List = styled.ul`
-list-style: none; 
+  list-style: none;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 24px;
- 
 `;
 
-
 export const Name = styled.p`
- font-size: 20px;
+  font-size: 20px;
   line-height: 1.11;
   text-align: center;
   letter-spacing: 0.02em;
   text-transform: capitalize;
- 
 `;
 
 export const BtnDelete = styled.button`

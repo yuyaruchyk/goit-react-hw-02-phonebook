@@ -1,4 +1,4 @@
-import {BtnDelete, List, Name} from "./ContactList.styled"
+import { BtnDelete, List, Name } from './ContactList.styled';
 
 export const ContactList = ({ items, onDelete }) => {
   return (
