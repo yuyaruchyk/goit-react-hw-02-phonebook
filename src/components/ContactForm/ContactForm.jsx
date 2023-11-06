@@ -2,7 +2,7 @@
 
 import { MainForm, Btn, StyledLabel, StyledField, StyledError} from './ContactForm.styled';
 import * as Yup from 'yup';
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 
  const FormSchema = Yup.object().shape({
    firstName: Yup.string()
@@ -27,8 +27,9 @@ export const ContactForm = ({ onAdd }) => (
       }}
       validationSchema={FormSchema}
         onSubmit={(values, actions) => {
-          actions.resetForm();
+          
           onAdd(values);
+          console.log(onAdd())
         }}
       >
     
@@ -37,14 +38,14 @@ export const ContactForm = ({ onAdd }) => (
 
            First Name
           <StyledField name="name" />
-          <StyledError name="name" component="span" />
+          <ErrorMessage name="name" component="span" />
         </StyledLabel>
 
         <StyledLabel>
           
        Phone
             <StyledField name="number"/>
-            <StyledError component={'span'} name="number" />
+            <ErrorMessage component={'span'} name="number" />
         
         
         </StyledLabel>
