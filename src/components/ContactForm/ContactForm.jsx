@@ -1,6 +1,6 @@
 
 
-import { MainForm, Btn, StyledLabel, StyledField, StyledError} from './ContactForm.styled';
+import { MainForm, Btn, StyledLabel, StyledField} from './ContactForm.styled';
 import * as Yup from 'yup';
 import { Formik, ErrorMessage } from 'formik';
 
